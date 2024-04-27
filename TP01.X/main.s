@@ -1,6 +1,3 @@
-; Estudante - J˙lio CÈsar S. Carvalhaes
-; MatrÌcula - 19/0090332
-
 #include <xc.inc>
 
 global v1
@@ -14,22 +11,22 @@ PSECT udata_shr
 	DS 1
 psect resetVec,class=CODE,delta=2   ; Vetor de Reset definido em xc.inc para os PIC10/12/16
 resetVec:
-    PAGESEL start		    ; Seleciona p·gina de cÛdigo de programa onde est· start
+    PAGESEL start		    ; Seleciona p√°gina de c√≥digo de programa onde est√° start
     goto start 
 
-psect code,class=CODE,delta=2	    ; Define uma secÁ„o o de cÛdigo de programa 
+psect code,class=CODE,delta=2	    ; Define uma sec√ß√£o o de c√≥digo de programa 
 start:
     BANKSEL PORTA		    ; Selecionei o reg "PORTA" do Banco 0
-    clrf    PORTA		    ; Por boas pr·ticas -> zerar os regs PORTA, PORTB e PORTC
+    clrf    PORTA		    ; Por boas pr√°ticas -> zerar os regs PORTA, PORTB e PORTC
     clrf    PORTB
     clrf    PORTC 
     
-    BANKSEL ANSEL                  ; SeleÁ„o do banco de memÛria do registrador ANSEL
+    BANKSEL ANSEL                  ; Sele√ß√£o do banco de mem√≥ria do registrador ANSEL
     clrf    ANSEL                  ; Zera ANSEL, para usar todas as portas como digitais
     clrf    ANSELH		   ; Zera ANSELH, para usar todas as portas como digitais
     
-    BANKSEL TRISA		   ; Seleciona o banco TRISA respons·vel pela definiÁ„o de entradas e saÌdas
-    clrf    TRISA		   ; Por boas pr·ticas -> zerar os regs TRISA, TRISB, TRISC
+    BANKSEL TRISA		   ; Seleciona o banco TRISA respons√°vel pela defini√ß√£o de entradas e sa√≠das
+    clrf    TRISA		   ; Por boas pr√°ticas -> zerar os regs TRISA, TRISB, TRISC
     clrf    TRISB
     clrf    TRISC
     movlw   00100000B		   ; Reconfigurando o RA5 como entrada;
@@ -38,36 +35,36 @@ start:
     movwf   TRISB
     movwf   TRISC
     
-    BANKSEL WPUB		   ; Seleciona o banco de regs onde est· localizado o registrador WPUB
+    BANKSEL WPUB		   ; Seleciona o banco de regs onde est√° localizado o registrador WPUB
     movwf   WPUB		   ; W para o registrador WPUB.
     BANKSEL PORTA		   ; 
     
 define_operacao:
     clrwdt
     clrw			    ; Zerar o W
-    btfsc   PORTA, 5		    ; Checando se o bit 5 (RA05) È igual a um.
+    btfsc   PORTA, 5		    ; Checando se o bit 5 (RA05) √© igual a um.
     goto    adicao
     goto    subtracao
 
 adicao:
-    movf    PORTB, W        ; M·scara
+    movf    PORTB, W        ; M√°scara
     andlw   00001111B       ; O valor fica armazenado no W
-    movwf   v1              ; Movendo o valor de W para a vari·vel "v1"
-    movlw   00001111B       ; M·scara
+    movwf   v1              ; Movendo o valor de W para a vari√°vel "v1"
+    movlw   00001111B       ; M√°scara
     andwf   PORTC, 0
-    movwf   v2              ; movendo o valor de W para a vari·vel "v2"
+    movwf   v2              ; movendo o valor de W para a vari√°vel "v2"
     movf    v2, W
     addwf   v1, 0           ; v1 + v2
     movwf   PORTA           ; Armazenar o resultado na PORTA
     goto    define_operacao ; Voltando para o loop "Define Operacao"
 
 subtracao:
-    movlw   00001111B       ; M·scara
+    movlw   00001111B       ; M√°scara
     andwf   PORTB, 0        ; O valor fica armazenado no W
-    movwf   v1              ; Movendo o valor de W para a vari·vel "v1"
-    movlw   00001111B       ; M·scara
+    movwf   v1              ; Movendo o valor de W para a vari√°vel "v1"
+    movlw   00001111B       ; M√°scara
     andwf   PORTC, 0
-    movwf   v2              ; movendo o valor de W para a vari·vel "v2"
+    movwf   v2              ; movendo o valor de W para a vari√°vel "v2"
     movf    v2, W
     subwf   v1, 0           ; v1 - v2
     movwf   PORTA           ; Armazenar o resultado na PORTA
