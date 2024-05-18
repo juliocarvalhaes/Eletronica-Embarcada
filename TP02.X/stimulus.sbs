@@ -1,0 +1,67 @@
+## SCL Builder Setup File: Do not edit!!
+
+## VERSION: MPLAB X
+## FORMAT:  v2.00.01
+## DEVICE:  PIC16F887
+
+## PINREGACTIONS
+cyc
+No Repeat
+--
+&
+## ADVPINREGACTIONS
+--
+&
+--
+COND2
+Any
+
+
+
+0
+cyc
+
+--
+&
+## CLOCK
+&
+## STIMULUSFILE
+a
+PORTB
+PC = 
+7d0
+1
+/home/julio/Documentos/Faculdade/10/EE_24_1/TP02.X/PORTB.txt
+Hex
+Yes
+
+--
+b
+PORTD
+PC = 
+7d0
+1
+/home/julio/Documentos/Faculdade/10/EE_24_1/TP02.X/PORTD.txt
+Hex
+Yes
+
+--
+
+PORTE
+PC = 
+7d0
+1
+/home/julio/Documentos/Faculdade/10/EE_24_1/TP02.X/PORTE.txt
+Hex
+Yes
+
+--
+&
+## RESPONSEFILE
+&
+## ASYNCH
+&
+## ADVANCEDSCL
+
+1
+&
